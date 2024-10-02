@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch
 from lab1_drewimhof import check_for_palindrome, score_password
 
 class TestLab1(unittest.TestCase):

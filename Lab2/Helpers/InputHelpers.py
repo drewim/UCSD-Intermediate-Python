@@ -1,6 +1,6 @@
 __all__ = ['inputInt', 'inputFloat', 'inputString', 'inputDate']
 
-# from DataTypeHelpers import *
+from Helpers.DataTypeHelpers import *
 from datetime import date
 
 def inputInt(prompt: str = "Enter an integer: ", min_value = 0, max_value = 100) -> int:
@@ -11,10 +11,10 @@ def inputInt(prompt: str = "Enter an integer: ", min_value = 0, max_value = 100)
         if isInt(value):
             integerValue: int = int(value)
             if not isValidEntry(integerValue, min_value, max_value):
-                print(f"Value is out of range. Please enter a value between {min_value} and {max_value}")
+                print(f"{integerValue} is out of range. Please enter a value between {min_value} and {max_value}")
                 continue
         else: 
-            print("Invalid entry. Input needs to be in the int format.")
+            print(f"Invalid entry: {value}. Input needs to be in the int format.")
             continue
         validInputEntered = 1
     return integerValue
@@ -27,10 +27,10 @@ def inputFloat(prompt: str = "Enter a float: ", min_value = 0, max_value = 100) 
         if isFloat(value):
             floatValue: float = float(value)
             if not isValidEntry(floatValue, min_value, max_value):
-                print(f"Value is out of range. Please enter a value between {min_value} and {max_value}")
+                print(f"{floatValue} is out of range. Please enter a value between {min_value} and {max_value}")
                 continue
         else:
-            print("Invalid entry. Input needs to be in the float format. Try again.")
+            print(f"Invalid entry: {value}. Input needs to be in the float format. Try again.")
             continue
         validInputEntered = 1
     return floatValue
@@ -41,7 +41,7 @@ def inputString(prompt: str = "Enter a string: ", min_length: int = 0, max_lengt
     while validStringEntered == 0:
         value: str = input(prompt)
         if not isValidStringLength(value, min_length, max_length):
-            print("Str length is out of range. Please try again.")
+            print(f"Str length {len(value)} for input {value} is out of range. Length must be between {min_length} and {max_length}")
             continue
         validStringEntered = 1
     return value
@@ -52,7 +52,7 @@ def inputDate(prompt: str = "Enter a date in ISO format (yyyy-mm-dd): "):
     while validDateEntered == 0:
         value: str = input(prompt)
         if not isDate(value):
-            print("Text needs to be in \"yyyy-mm-dd\" format. Try again")
+            print(f"{value} needs to be in \"yyyy-mm-dd\" format. Try again")
             continue
         validDateEntered = 1
     return date.fromisoformat(value)
@@ -64,8 +64,9 @@ def isValidEntry(value, min_value, max_value) -> bool:
 
 def isValidStringLength(value: str, min_length: int, max_length: int) -> bool:
     """Check if string falls between min_length and max_length and return bool"""
-    return True if len(value) > min_length and len(value) < max_length else False
+    return True if len(value) >= min_length and len(value) <= max_length else False
 
 
 if __name__ == '__main__':
-    print(inputDate())
+    print(inputString(min_length=1, max_length=10))
+    # print(inputDate())
