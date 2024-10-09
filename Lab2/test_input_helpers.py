@@ -4,7 +4,6 @@ from parameterized import parameterized
 from io import StringIO
 import sys
 
-# Import the functions you want to test
 from Helpers import *
 
 class TestInputFunctions(unittest.TestCase):
