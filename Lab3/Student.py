@@ -26,7 +26,7 @@ class Student(object):
         assert self.isValidScore(score), "Score should be between 0 and 4"
         self.courses[course] = score
 
-    def addCourses(self, courses) -> None:
+    def addCourses(self, courses: dict) -> None:
         assert isinstance(courses, dict), "Please enter courses in a dictionary {}"
         self.courses.update(courses)
 
@@ -99,7 +99,7 @@ if __name__ == '__main__':
     printStudents(students)    
 
     # Query 1
-    lastNameAscending: list[Student] = sorted(students, key=lambda student: (student.lastName, student.firstName), reverse=True)
+    lastNameAscending: list[Student] = sorted(students, key=lambda student: (student.lastName, student.firstName))
     print("QUERY 1: Students sorted by lastName, FirstName in ascending order")
     printStudents(lastNameAscending)
 
@@ -109,7 +109,7 @@ if __name__ == '__main__':
     printStudents(gpaDescending)
 
     # Query 3
-    uniqueCourses = set(element for s in students for element in s.courses.keys())
+    uniqueCourses: set[str] = set(element for s in students for element in s.courses.keys())
     print("QUERY 3: Course List")
     print(f"Count: {len(uniqueCourses)}, {sorted(uniqueCourses)}\n")
 
